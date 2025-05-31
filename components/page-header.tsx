@@ -1,41 +1,31 @@
-import { UserCircleIcon } from "lucide-react"
-import { BackButton } from "@/components/back-button"
-import { Button } from "@/components/ui/button"
+"use client"
+
 import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface PageHeaderProps {
   title: string
   description?: string
-  action?: {
-    label: string
-    href?: string
-    onClick?: () => void
-  }
+  showBackButton?: boolean
+  backHref?: string
 }
 
-export function PageHeader({ title, description, action }: PageHeaderProps) {
+export function PageHeader({ title, description, showBackButton = true, backHref = "/hiring-manager-dashboard" }: PageHeaderProps) {
   return (
-    <div className="border-b pb-4">
-      <div className="flex items-center justify-between py-4">
-        <BackButton />
-        <Button variant="ghost" size="sm" asChild className="font-medium">
-          <Link href="/vendor-account" className="flex items-center gap-2">
-            <UserCircleIcon className="h-5 w-5" />
-            <span>Vendor Account</span>
+    <div className="space-y-2">
+      <div className="flex items-center gap-4">
+        {showBackButton && (
+          <Link href={backHref}>
+            <Button variant="ghost" size="icon" className="h-8 w-8">
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
           </Link>
-        </Button>
-      </div>
-      <div className="flex items-center justify-between py-2">
-        <div>
-          <h1 className="text-2xl font-bold">{title}</h1>
-          {description && <p className="text-gray-500">{description}</p>}
-        </div>
-        {action && (
-          <Button className="gap-2">
-            <span className="text-lg">+</span>
-            {action.label}
-          </Button>
         )}
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+          {description && <p className="text-gray-600">{description}</p>}
+        </div>
       </div>
     </div>
   )

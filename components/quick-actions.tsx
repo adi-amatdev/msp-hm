@@ -1,78 +1,77 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Plus, Users, Calendar, FileText, TrendingUp, Search } from "lucide-react";
-import Link from "next/link";
+"use client"
+
+import Link from "next/link"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FileText, Users, Calendar, Clock, DollarSign, UserX } from "lucide-react"
+
+const quickActions = [
+  {
+    title: "New Job Request",
+    description: "Submit a new staffing requirement",
+    icon: <FileText className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/job-requests",
+    color: "text-blue-600",
+  },
+  {
+    title: "Review Profiles",
+    description: "Evaluate candidate profiles",
+    icon: <Users className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/profile-review",
+    color: "text-green-600",
+  },
+  {
+    title: "Schedule Interview",
+    description: "Set up candidate interviews",
+    icon: <Calendar className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/interviews",
+    color: "text-purple-600",
+  },
+  {
+    title: "Timesheets",
+    description: "Review and approve timesheets",
+    icon: <Clock className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/timesheets",
+    color: "text-orange-600",
+  },
+  {
+    title: "Expenses",
+    description: "Manage expense approvals",
+    icon: <DollarSign className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/expenses",
+    color: "text-red-600",
+  },
+  {
+    title: "Exit Process",
+    description: "Handle employee exits",
+    icon: <UserX className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/exit-process",
+    color: "text-gray-600",
+  },
+]
 
 export function QuickActions() {
-  const actions = [
-    {
-      title: "Create Job Post",
-      description: "Create new job posting from HM requirements",
-      icon: <Plus className="h-5 w-5" />,
-      href: "/msp-dashboard/create-job-posts",
-      color: "bg-blue-600 hover:bg-blue-700",
-    },
-    {
-      title: "Screen Profiles",
-      description: "Review and validate candidate submissions",
-      icon: <Search className="h-5 w-5" />,
-      href: "/msp-dashboard/profile-screening",
-      color: "bg-green-600 hover:bg-green-700",
-    },
-    {
-      title: "Schedule Interviews",
-      description: "Coordinate interviews with hiring managers",
-      icon: <Calendar className="h-5 w-5" />,
-      href: "/msp-dashboard/interview-requests",
-      color: "bg-purple-600 hover:bg-purple-700",
-    },
-    {
-      title: "Release Offers",
-      description: "Process and release approved offers",
-      icon: <FileText className="h-5 w-5" />,
-      href: "/msp-dashboard/release-offers",
-      color: "bg-orange-600 hover:bg-orange-700",
-    },
-    {
-      title: "Track Progress",
-      description: "Monitor job and candidate progress",
-      icon: <TrendingUp className="h-5 w-5" />,
-      href: "/msp-dashboard/track-job-progress",
-      color: "bg-indigo-600 hover:bg-indigo-700",
-    },
-    {
-      title: "View Reports",
-      description: "Access analytics and performance reports",
-      icon: <Users className="h-5 w-5" />,
-      href: "/msp-dashboard/reports",
-      color: "bg-gray-600 hover:bg-gray-700",
-    },
-  ];
-
   return (
     <Card>
       <CardHeader>
         <CardTitle>Quick Actions</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-          {actions.map((action) => (
-            <Link key={action.title} href={action.href}>
-              <div
-                className={`w-full h-full p-4 rounded-md flex flex-col items-center justify-center gap-2 ${action.color} text-white text-center transition-colors hover:brightness-110`}
-              >
-                {action.icon}
-                <div className="flex flex-col items-center w-full">
-                  <div className="font-medium text-sm">{action.title}</div>
-                  <div className="text-xs opacity-90 break-words text-wrap leading-tight">
-                    {action.description}
-                  </div>
-                </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {quickActions.map((action) => (
+            <Link
+              key={action.href}
+              href={action.href}
+              className="flex items-center gap-4 rounded-lg border p-4 hover:bg-accent transition-colors"
+            >
+              <div className={action.color}>{action.icon}</div>
+              <div>
+                <h3 className="font-medium">{action.title}</h3>
+                <p className="text-sm text-muted-foreground">{action.description}</p>
               </div>
             </Link>
           ))}
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
