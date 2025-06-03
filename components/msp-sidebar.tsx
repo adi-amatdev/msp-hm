@@ -4,15 +4,14 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import {
-  HomeIcon,
-  PieChartIcon,
-  UserIcon,
+  FileText,
+  Users,
+  Calendar,
+  Clock,
+  DollarSign,
+  UserX,
   XIcon,
   CuboidIcon,
-  CalendarIcon,
-  FileTextIcon,
-  TrendingUpIcon,
-  PlusIcon,
 } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -26,12 +25,44 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const isMobile = useIsMobile()
   const [mounted, setMounted] = useState(false)
 
-  // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true)
   }, [])
 
   if (!mounted) return null
+
+  const quickActions = [
+    {
+      label: "New Job Request",
+      href: "/hiring-manager-dashboard/job-requests",
+      icon: <FileText className="h-5 w-5" />,
+    },
+    {
+      label: "Review Profiles",
+      href: "/hiring-manager-dashboard/profile-review",
+      icon: <Users className="h-5 w-5" />,
+    },
+    {
+      label: "Schedule Interview",
+      href: "/hiring-manager-dashboard/interviews",
+      icon: <Calendar className="h-5 w-5" />,
+    },
+    {
+      label: "Timesheets",
+      href: "/hiring-manager-dashboard/timesheets",
+      icon: <Clock className="h-5 w-5" />,
+    },
+    {
+      label: "Expenses",
+      href: "/hiring-manager-dashboard/expenses",
+      icon: <DollarSign className="h-5 w-5" />,
+    },
+    {
+      label: "Exit Process",
+      href: "/hiring-manager-dashboard/exit-process",
+      icon: <UserX className="h-5 w-5" />,
+    },
+  ]
 
   return (
     <>
@@ -44,7 +75,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           <div className="flex items-center justify-between">
             <div className="md:hidden flex items-center gap-2">
               <CuboidIcon className="h-6 w-6 text-blue-600" />
-              <span className="text-lg font-semibold">MSP Frontend</span>
+              <span className="text-lg font-semibold">MSP HM</span>
             </div>
             {isMobile && (
               <button onClick={onClose} className="p-1 rounded-md hover:bg-gray-100">
@@ -54,33 +85,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           </div>
 
           <div className="mt-6 space-y-1">
-            <NavItem href="/msp-dashboard" icon={<HomeIcon className="h-5 w-5" />} label="Dashboard" />
             <NavItem
-              href="/msp-dashboard/create-job-posts"
-              icon={<PlusIcon className="h-5 w-5" />}
-              label="Create Job Posts"
+              href="/hiring-manager-dashboard"
+              icon={<CuboidIcon className="h-5 w-5" />}
+              label="Dashboard"
             />
-            <NavItem
-              href="/msp-dashboard/profile-screening"
-              icon={<UserIcon className="h-5 w-5" />}
-              label="Profile Screening"
-            />
-            <NavItem
-              href="/msp-dashboard/interview-requests"
-              icon={<CalendarIcon className="h-5 w-5" />}
-              label="Interview Requests"
-            />
-            <NavItem
-              href="/msp-dashboard/release-offers"
-              icon={<FileTextIcon className="h-5 w-5" />}
-              label="Release Offers"
-            />
-            <NavItem
-              href="/msp-dashboard/track-job-progress"
-              icon={<TrendingUpIcon className="h-5 w-5" />}
-              label="Track Job Progress"
-            />
-            <NavItem href="/msp-dashboard/reports" icon={<PieChartIcon className="h-5 w-5" />} label="Reports" />
+            {quickActions.map((action) => (
+              <NavItem key={action.href} href={action.href} icon={action.icon} label={action.label} />
+            ))}
           </div>
         </div>
       </div>

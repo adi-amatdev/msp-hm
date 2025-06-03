@@ -6,8 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "MSP Frontend Team - TalentBridge",
-  description: "MSP Frontend Team Platform for Managing Hiring Process",
+  title: "MSP HM Team - TalentBridge",
+  description: "MSP HM Team Platform",
     generator: 'v0.dev'
 }
 

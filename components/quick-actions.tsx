@@ -2,51 +2,57 @@
 
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { FileText, Users, Calendar, Clock, DollarSign, UserX } from "lucide-react"
+import { FileText, Users, Calendar, Clock, DollarSign, UserX, FileCheck, ClipboardCheck, Bell } from "lucide-react"
 
 const quickActions = [
   {
-    title: "New Job Request",
-    description: "Submit a new staffing requirement",
-    icon: <FileText className="h-5 w-5" />,
-    href: "/hiring-manager-dashboard/job-requests",
-    color: "text-blue-600",
-  },
-  {
-    title: "Review Profiles",
-    description: "Evaluate candidate profiles",
-    icon: <Users className="h-5 w-5" />,
-    href: "/hiring-manager-dashboard/profile-review",
-    color: "text-green-600",
-  },
-  {
-    title: "Schedule Interview",
-    description: "Set up candidate interviews",
-    icon: <Calendar className="h-5 w-5" />,
-    href: "/hiring-manager-dashboard/interviews",
-    color: "text-purple-600",
-  },
-  {
     title: "Timesheets",
-    description: "Review and approve timesheets",
+    description: "Review and approve contractor timesheets",
     icon: <Clock className="h-5 w-5" />,
-    href: "/hiring-manager-dashboard/timesheets",
+    href: "/timesheets",
     color: "text-orange-600",
+    badge: "5 Pending"
   },
   {
     title: "Expenses",
-    description: "Manage expense approvals",
+    description: "Manage expense claims and approvals",
     icon: <DollarSign className="h-5 w-5" />,
-    href: "/hiring-manager-dashboard/expenses",
-    color: "text-red-600",
+    href: "/expenses",
+    color: "text-green-600",
+    badge: "3 New"
   },
   {
     title: "Exit Process",
-    description: "Handle employee exits",
+    description: "Handle contractor offboarding",
     icon: <UserX className="h-5 w-5" />,
-    href: "/hiring-manager-dashboard/exit-process",
-    color: "text-gray-600",
+    href: "/exit-process",
+    color: "text-red-600",
+    badge: "2 Active"
   },
+  {
+    title: "Documents",
+    description: "Access and manage documents",
+    icon: <FileCheck className="h-5 w-5" />,
+    href: "/documents",
+    color: "text-blue-600",
+    badge: "7 Updated"
+  },
+  {
+    title: "Tasks",
+    description: "Track and manage assignments",
+    icon: <ClipboardCheck className="h-5 w-5" />,
+    href: "/tasks",
+    color: "text-purple-600",
+    badge: "4 Due"
+  },
+  {
+    title: "Notifications",
+    description: "View system notifications",
+    icon: <Bell className="h-5 w-5" />,
+    href: "/notifications",
+    color: "text-indigo-600",
+    badge: "9 Unread"
+  }
 ]
 
 export function QuickActions() {
@@ -61,11 +67,18 @@ export function QuickActions() {
             <Link
               key={action.href}
               href={action.href}
-              className="flex items-center gap-4 rounded-lg border p-4 hover:bg-accent transition-colors"
+              className="group flex items-start gap-4 rounded-lg border p-4 hover:bg-accent transition-colors"
             >
-              <div className={action.color}>{action.icon}</div>
-              <div>
-                <h3 className="font-medium">{action.title}</h3>
+              <div className={`${action.color} mt-1`}>{action.icon}</div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-medium group-hover:text-accent-foreground">{action.title}</h3>
+                  {action.badge && (
+                    <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+                      {action.badge}
+                    </span>
+                  )}
+                </div>
                 <p className="text-sm text-muted-foreground">{action.description}</p>
               </div>
             </Link>

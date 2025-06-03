@@ -16,6 +16,39 @@ interface HiringManagerSidebarProps {
 export function HiringManagerSidebar({ isOpen, onClose }: HiringManagerSidebarProps) {
   const pathname = usePathname()
 
+  const quickActions = [
+    {
+      title: "New Job Request",
+      href: "/hiring-manager-dashboard/job-requests",
+      icon: <FileText className="h-5 w-5" />,
+    },
+    {
+      title: "Review Profiles",
+      href: "/hiring-manager-dashboard/profile-review",
+      icon: <Users className="h-5 w-5" />,
+    },
+    {
+      title: "Schedule Interview",
+      href: "/hiring-manager-dashboard/interviews",
+      icon: <Calendar className="h-5 w-5" />,
+    },
+    {
+      title: "Timesheets",
+      href: "/hiring-manager-dashboard/timesheets",
+      icon: <Clock className="h-5 w-5" />,
+    },
+    {
+      title: "Expenses",
+      href: "/hiring-manager-dashboard/expenses",
+      icon: <DollarSign className="h-5 w-5" />,
+    },
+    {
+      title: "Exit Process",
+      href: "/hiring-manager-dashboard/exit-process",
+      icon: <UserX className="h-5 w-5" />,
+    },
+  ]
+
   const routes = [
     {
       href: "/hiring-manager-dashboard",
@@ -23,42 +56,12 @@ export function HiringManagerSidebar({ isOpen, onClose }: HiringManagerSidebarPr
       icon: <LayoutDashboard className="h-5 w-5" />,
       active: pathname === "/hiring-manager-dashboard",
     },
-    {
-      href: "/hiring-manager-dashboard/job-requests",
-      label: "Job Requests",
-      icon: <FileText className="h-5 w-5" />,
-      active: pathname === "/hiring-manager-dashboard/job-requests",
-    },
-    {
-      href: "/hiring-manager-dashboard/profile-review",
-      label: "Profile Review",
-      icon: <Users className="h-5 w-5" />,
-      active: pathname === "/hiring-manager-dashboard/profile-review",
-    },
-    {
-      href: "/hiring-manager-dashboard/interviews",
-      label: "Interviews",
-      icon: <Calendar className="h-5 w-5" />,
-      active: pathname === "/hiring-manager-dashboard/interviews",
-    },
-    {
-      href: "/hiring-manager-dashboard/timesheets",
-      label: "Timesheets",
-      icon: <Clock className="h-5 w-5" />,
-      active: pathname === "/hiring-manager-dashboard/timesheets",
-    },
-    {
-      href: "/hiring-manager-dashboard/expenses",
-      label: "Expenses",
-      icon: <DollarSign className="h-5 w-5" />,
-      active: pathname === "/hiring-manager-dashboard/expenses",
-    },
-    {
-      href: "/hiring-manager-dashboard/exit-process",
-      label: "Exit Process",
-      icon: <UserX className="h-5 w-5" />,
-      active: pathname === "/hiring-manager-dashboard/exit-process",
-    },
+    ...quickActions.map((action) => ({
+      href: action.href,
+      label: action.title,
+      icon: action.icon,
+      active: pathname === action.href,
+    })),
   ]
 
   return (
@@ -90,4 +93,4 @@ export function HiringManagerSidebar({ isOpen, onClose }: HiringManagerSidebarPr
       </SheetContent>
     </Sheet>
   )
-} 
+}

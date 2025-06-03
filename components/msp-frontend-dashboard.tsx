@@ -21,7 +21,7 @@ export function MspFrontendDashboard() {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">MSP Frontend Team Dashboard</h1>
+                <h1 className="text-2xl font-bold text-gray-900">MSP HM Dashboard</h1>
                 <p className="text-gray-600">Manage the complete hiring pipeline from job creation to offer release</p>
               </div>
             </div>
