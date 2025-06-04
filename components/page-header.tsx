@@ -10,10 +10,7 @@ interface PageHeaderProps {
   backHref?: string
   backLabel?: string
   backVariant?: "default" | "primary" | "secondary"
-  action?: {
-    label: string
-    onClick?: () => void
-  }
+  action?: React.ReactNode
 }
 
 export function PageHeader({
@@ -36,11 +33,7 @@ export function PageHeader({
           {description && <p className="text-gray-600">{description}</p>}
         </div>
       </div>
-      {action && (
-        <Button onClick={action.onClick} className="bg-blue-600 hover:bg-blue-700 text-white">
-          {action.label}
-        </Button>
-      )}
+      {action}
     </div>
   )
 }

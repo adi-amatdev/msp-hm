@@ -9,7 +9,7 @@ const quickActions = [
     title: "Timesheets",
     description: "Review and approve contractor timesheets",
     icon: <Clock className="h-5 w-5" />,
-    href: "/timesheets",
+    href: "/hiring-manager-dashboard/timesheets",
     color: "text-orange-600",
     badge: "5 Pending"
   },
@@ -17,41 +17,41 @@ const quickActions = [
     title: "Expenses",
     description: "Manage expense claims and approvals",
     icon: <DollarSign className="h-5 w-5" />,
-    href: "/expenses",
+    href: "/hiring-manager-dashboard/expenses",
     color: "text-green-600",
     badge: "3 New"
+  },
+  {
+    title: "Interviews",
+    description: "Schedule and manage interviews",
+    icon: <Calendar className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/interviews",
+    color: "text-blue-600",
+    badge: "2 Upcoming"
   },
   {
     title: "Exit Process",
     description: "Handle contractor offboarding",
     icon: <UserX className="h-5 w-5" />,
-    href: "/exit-process",
+    href: "/hiring-manager-dashboard/exit-process",
     color: "text-red-600",
     badge: "2 Active"
   },
   {
-    title: "Documents",
-    description: "Access and manage documents",
-    icon: <FileCheck className="h-5 w-5" />,
-    href: "/documents",
-    color: "text-blue-600",
-    badge: "7 Updated"
-  },
-  {
-    title: "Tasks",
-    description: "Track and manage assignments",
-    icon: <ClipboardCheck className="h-5 w-5" />,
-    href: "/tasks",
+    title: "Job Requests",
+    description: "Submit and track staffing requirements",
+    icon: <FileText className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/job-requests",
     color: "text-purple-600",
-    badge: "4 Due"
+    badge: "4 Open"
   },
   {
-    title: "Notifications",
-    description: "View system notifications",
-    icon: <Bell className="h-5 w-5" />,
-    href: "/notifications",
+    title: "Profile Review",
+    description: "Review candidate profiles",
+    icon: <Users className="h-5 w-5" />,
+    href: "/hiring-manager-dashboard/profile-review",
     color: "text-indigo-600",
-    badge: "9 Unread"
+    badge: "9 Pending"
   }
 ]
 

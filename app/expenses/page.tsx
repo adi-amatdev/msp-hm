@@ -242,9 +242,11 @@ export default function ExpensesPage() {
       <PageHeader
         title="Expenses"
         description="Manage and submit expense claims for your contractors"
-        action={{
-          label: "Submit New Expense",
-        }}
+        action={
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            Submit New Expense
+          </Button>
+        }
       />
 
       {/* Search and Filter Bar */}

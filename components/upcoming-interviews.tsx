@@ -1,6 +1,6 @@
-import { CalendarIcon, ClockIcon, MapPinIcon, VideoIcon } from "lucide-react"
+import Link from "next/link"
+import { CalendarIcon, ClockIcon, ArrowRight } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
 // This would typically come from an API
@@ -9,36 +9,30 @@ const interviews = [
     id: 1,
     candidate: {
       name: "Michael Johnson",
-      initials: "MJ",
       position: "Senior React Developer",
     },
     date: "Apr 5, 2025",
-    time: "10:00 AM EST",
-    location: "TechCorp Inc.",
+    time: "10:00 AM",
     type: "Video",
   },
   {
     id: 2,
     candidate: {
       name: "Sarah Williams",
-      initials: "SW",
       position: "DevOps Engineer",
     },
     date: "Apr 7, 2025",
-    time: "2:30 PM EST",
-    location: "CloudSys Solutions",
+    time: "2:30 PM",
     type: "Video",
   },
   {
     id: 3,
     candidate: {
       name: "David Chen",
-      initials: "DC",
       position: "Data Scientist",
     },
     date: "Apr 8, 2025",
-    time: "11:15 AM PST",
-    location: "DataViz Analytics",
+    time: "11:15 AM",
     type: "In-person",
   },
 ]
@@ -46,55 +40,44 @@ const interviews = [
 export function UpcomingInterviews() {
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-xl">Upcoming Interviews</CardTitle>
-        <p className="text-sm text-muted-foreground">Scheduled interviews for your candidates</p>
+        <Link 
+          href="/hiring-manager-dashboard/interviews" 
+          className="text-xs text-blue-600 hover:underline flex items-center"
+        >
+          View all <ArrowRight className="h-3 w-3 ml-1" />
+        </Link>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-4">
           {interviews.map((interview) => (
-            <Card key={interview.id} className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="flex items-center gap-3 border-b p-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-muted font-semibold">
-                    {interview.candidate.initials}
+            <Link
+              key={interview.id}
+              href="/hiring-manager-dashboard/interviews"
+              className="flex items-center justify-between border-b pb-4 last:border-0 hover:bg-gray-50 p-2 rounded-md transition-colors"
+            >
+              <div>
+                <h3 className="font-medium">{interview.candidate.name}</h3>
+                <p className="text-sm text-muted-foreground">{interview.candidate.position}</p>
+                <div className="flex items-center gap-3 mt-1">
+                  <div className="flex items-center text-xs text-gray-500">
+                    <CalendarIcon className="h-3 w-3 mr-1" />
+                    {interview.date}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold">{interview.candidate.name}</h3>
-                    <p className="text-sm text-muted-foreground">{interview.candidate.position}</p>
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className={interview.type === "Video" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}
-                  >
-                    {interview.type === "Video" ? <VideoIcon className="mr-1 h-3 w-3" /> : null}
-                    {interview.type}
-                  </Badge>
-                </div>
-                <div className="space-y-2 p-4">
-                  <div className="flex items-center gap-2 text-sm">
-                    <CalendarIcon className="h-4 w-4 text-muted-foreground" />
-                    <span>{interview.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <ClockIcon className="h-4 w-4 text-muted-foreground" />
-                    <span>{interview.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <MapPinIcon className="h-4 w-4 text-muted-foreground" />
-                    <span>{interview.location}</span>
+                  <div className="flex items-center text-xs text-gray-500">
+                    <ClockIcon className="h-3 w-3 mr-1" />
+                    {interview.time}
                   </div>
                 </div>
-                <div className="grid grid-cols-2 border-t">
-                  <Button variant="ghost" className="rounded-none py-5">
-                    View Details
-                  </Button>
-                  <Button variant="ghost" className="rounded-none border-l py-5">
-                    Prepare Notes
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              <Badge
+                variant="outline"
+                className={interview.type === "Video" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}
+              >
+                {interview.type}
+              </Badge>
+            </Link>
           ))}
         </div>
       </CardContent>

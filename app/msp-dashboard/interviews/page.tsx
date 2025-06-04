@@ -115,9 +115,11 @@ export default function InterviewsPage() {
       <PageHeader
         title="Interview Coordination"
         description="Schedule and manage interviews between candidates and hiring managers"
-        action={{
-          label: "Schedule Interview",
-        }}
+        action={
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            Schedule Interview
+          </Button>
+        }
       />
 
       <Tabs defaultValue="scheduled" className="w-full">

@@ -161,9 +161,11 @@ export default function ExitProcessPage() {
       <PageHeader
         title="Exit Process"
         description="Manage contractor exit processes and offboarding"
-        action={{
-          label: "Create Exit Process",
-        }}
+        action={
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            Create Exit Process
+          </Button>
+        }
       />
 
       {/* Search and Filter Bar */}

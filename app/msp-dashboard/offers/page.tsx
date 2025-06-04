@@ -43,9 +43,11 @@ export default function OffersPage() {
       <PageHeader
         title="Offer Management"
         description="Release and track job offers after hiring manager approval"
-        action={{
-          label: "Create Offer",
-        }}
+        action={
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            Create Offer
+          </Button>
+        }
       />
 
       <div className="space-y-4">

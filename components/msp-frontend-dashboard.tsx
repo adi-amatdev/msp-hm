@@ -4,17 +4,17 @@ import { useState } from "react"
 import { Header } from "@/components/header"
 import { Sidebar } from "@/components/msp-sidebar"
 import { MspDashboardStats } from "@/components/msp-dashboard-stats"
-import { ActiveJobRequirements } from "@/components/active-job-requirements"
-import { PendingApprovals } from "@/components/pending-approvals"
-import { RecentSubmissions } from "@/components/recent-submissions"
 import { QuickActions } from "@/components/quick-actions"
+import { UpcomingInterviews } from "./upcoming-interviews"
+import { TimesheetApprovals } from "./timesheet-approvals"
+import { ExpenseApprovals } from "./expense-approvals"
 
 export function MspFrontendDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header onOpenSidebar={() => setSidebarOpen(true)} />
+      <Header onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       <div className="flex flex-1">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <main className="flex-1 p-4 md:p-6">
@@ -30,12 +30,15 @@ export function MspFrontendDashboard() {
 
             <QuickActions />
 
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <ActiveJobRequirements />
-              <PendingApprovals />
+            <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+              <div className="xl:col-span-2">
+                <UpcomingInterviews />
+              </div>
+              <div className="space-y-6">
+                <TimesheetApprovals />
+                <ExpenseApprovals />
+              </div>
             </div>
-
-            <RecentSubmissions />
           </div>
         </main>
       </div>

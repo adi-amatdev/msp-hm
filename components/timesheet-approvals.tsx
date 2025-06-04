@@ -1,75 +1,62 @@
 "use client"
 
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { ArrowRight } from "lucide-react"
 
 export function TimesheetApprovals() {
   const pendingTimesheets = [
     {
       id: 1,
       name: "John Smith",
-      role: "Senior Frontend Developer",
-      avatar: "/avatars/01.png",
-      period: "Mar 1-15, 2024",
       hours: 80,
-      submittedAt: "1 day ago",
+      period: "Mar 1-15",
     },
     {
       id: 2,
       name: "Sarah Johnson",
-      role: "Full Stack Developer",
-      avatar: "/avatars/02.png",
-      period: "Mar 1-15, 2024",
       hours: 75,
-      submittedAt: "2 days ago",
+      period: "Mar 1-15",
     },
     {
       id: 3,
       name: "Michael Brown",
-      role: "DevOps Engineer",
-      avatar: "/avatars/03.png",
-      period: "Mar 1-15, 2024",
       hours: 82,
-      submittedAt: "3 days ago",
+      period: "Mar 1-15",
     },
   ]
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Timesheet Approvals</CardTitle>
+      <CardHeader className="pb-3 flex flex-row items-center justify-between">
+        <CardTitle className="text-lg">Timesheet Approvals</CardTitle>
+        <Link 
+          href="/hiring-manager-dashboard/timesheets" 
+          className="text-xs text-blue-600 hover:underline flex items-center"
+        >
+          View all <ArrowRight className="h-3 w-3 ml-1" />
+        </Link>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {pendingTimesheets.map((timesheet) => (
-            <div key={timesheet.id} className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Avatar>
-                  <AvatarImage src={timesheet.avatar} />
-                  <AvatarFallback>{timesheet.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm font-medium">{timesheet.name}</p>
-                  <p className="text-sm text-muted-foreground">{timesheet.role}</p>
-                </div>
+            <Link 
+              key={timesheet.id} 
+              href="/hiring-manager-dashboard/timesheets"
+              className="flex items-center justify-between hover:bg-gray-50 p-2 rounded-md transition-colors"
+            >
+              <div>
+                <p className="font-medium text-sm">{timesheet.name}</p>
+                <p className="text-xs text-muted-foreground">{timesheet.period}</p>
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="text-right">
-                  <p className="text-sm font-medium">{timesheet.period}</p>
-                  <p className="text-sm text-muted-foreground">{timesheet.hours} hours</p>
-                </div>
-                <Badge variant="outline">{timesheet.submittedAt}</Badge>
-                <div className="flex space-x-2">
-                  <Button variant="outline" size="sm">View</Button>
-                  <Button size="sm">Approve</Button>
-                </div>
-              </div>
-            </div>
+              <Badge variant="outline" className="bg-orange-50 text-orange-700">
+                {timesheet.hours}h
+              </Badge>
+            </Link>
           ))}
         </div>
       </CardContent>
     </Card>
   )
-} 
+}

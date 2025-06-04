@@ -207,9 +207,11 @@ export default function TimesheetsPage() {
       <PageHeader
         title="Timesheets"
         description="Manage and submit timesheets for your contractors"
-        action={{
-          label: "Create New Timesheet",
-        }}
+        action={
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            Create New Timesheet
+          </Button>
+        }
       />
 
       {/* Search and Filter Bar */}

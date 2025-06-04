@@ -133,9 +133,11 @@ export default function JobManagementPage() {
       <PageHeader
         title="Job Management"
         description="Create and manage job postings for hiring managers"
-        action={{
-          label: "Create Job Post",
-        }}
+        action={
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            Create Job Post
+          </Button>
+        }
       />
 
       {/* Search and Filter Bar */}

@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, LayoutDashboard, FileText, Users, Calendar, Clock, DollarSign, UserX } from "lucide-react"
+import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { LayoutDashboard, FileText, Users, Calendar, Clock, DollarSign, UserX } from "lucide-react"
 
 interface HiringManagerSidebarProps {
   isOpen: boolean
@@ -65,20 +65,15 @@ export function HiringManagerSidebar({ isOpen, onClose }: HiringManagerSidebarPr
   ]
 
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetTrigger asChild>
-        <Button variant="ghost" className="md:hidden">
-          <Menu className="h-6 w-6" />
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10">
-          <div className="flex flex-col space-y-3">
+    <>
+      {/* Desktop sidebar */}
+      <div className="hidden lg:block w-64 border-r bg-white">
+        <ScrollArea className="h-full py-6">
+          <div className="px-4 space-y-3">
             {routes.map((route) => (
               <Link
                 key={route.href}
                 href={route.href}
-                onClick={onClose}
                 className={cn(
                   "flex w-full items-center gap-3 rounded-md border border-transparent px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors",
                   route.active ? "bg-accent text-accent-foreground" : "transparent"
@@ -90,7 +85,31 @@ export function HiringManagerSidebar({ isOpen, onClose }: HiringManagerSidebarPr
             ))}
           </div>
         </ScrollArea>
-      </SheetContent>
-    </Sheet>
+      </div>
+
+      {/* Mobile sidebar */}
+      <Sheet open={isOpen} onOpenChange={onClose}>
+        <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+          <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10">
+            <div className="flex flex-col space-y-3">
+              {routes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  onClick={onClose}
+                  className={cn(
+                    "flex w-full items-center gap-3 rounded-md border border-transparent px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors",
+                    route.active ? "bg-accent text-accent-foreground" : "transparent"
+                  )}
+                >
+                  {route.icon}
+                  {route.label}
+                </Link>
+              ))}
+            </div>
+          </ScrollArea>
+        </SheetContent>
+      </Sheet>
+    </>
   )
 }

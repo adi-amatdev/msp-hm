@@ -1,75 +1,62 @@
 "use client"
 
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { ArrowRight } from "lucide-react"
 
 export function ExpenseApprovals() {
   const pendingExpenses = [
     {
       id: 1,
       name: "John Smith",
-      role: "Senior Frontend Developer",
-      avatar: "/avatars/01.png",
       amount: 450,
-      description: "Conference Registration",
-      submittedAt: "2 days ago",
+      description: "Conference",
     },
     {
       id: 2,
       name: "Sarah Johnson",
-      role: "Full Stack Developer",
-      avatar: "/avatars/02.png",
       amount: 320,
-      description: "Training Materials",
-      submittedAt: "3 days ago",
+      description: "Training",
     },
     {
       id: 3,
       name: "Michael Brown",
-      role: "DevOps Engineer",
-      avatar: "/avatars/03.png",
       amount: 180,
-      description: "Software License",
-      submittedAt: "4 days ago",
+      description: "Software",
     },
   ]
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Expense Approvals</CardTitle>
+      <CardHeader className="pb-3 flex flex-row items-center justify-between">
+        <CardTitle className="text-lg">Expense Approvals</CardTitle>
+        <Link 
+          href="/hiring-manager-dashboard/expenses" 
+          className="text-xs text-blue-600 hover:underline flex items-center"
+        >
+          View all <ArrowRight className="h-3 w-3 ml-1" />
+        </Link>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {pendingExpenses.map((expense) => (
-            <div key={expense.id} className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Avatar>
-                  <AvatarImage src={expense.avatar} />
-                  <AvatarFallback>{expense.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm font-medium">{expense.name}</p>
-                  <p className="text-sm text-muted-foreground">{expense.role}</p>
-                </div>
+            <Link 
+              key={expense.id} 
+              href="/hiring-manager-dashboard/expenses"
+              className="flex items-center justify-between hover:bg-gray-50 p-2 rounded-md transition-colors"
+            >
+              <div>
+                <p className="font-medium text-sm">{expense.name}</p>
+                <p className="text-xs text-muted-foreground">{expense.description}</p>
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="text-right">
-                  <p className="text-sm font-medium">${expense.amount}</p>
-                  <p className="text-sm text-muted-foreground">{expense.description}</p>
-                </div>
-                <Badge variant="outline">{expense.submittedAt}</Badge>
-                <div className="flex space-x-2">
-                  <Button variant="outline" size="sm">View</Button>
-                  <Button size="sm">Approve</Button>
-                </div>
-              </div>
-            </div>
+              <Badge variant="outline" className="bg-green-50 text-green-700">
+                ${expense.amount}
+              </Badge>
+            </Link>
           ))}
         </div>
       </CardContent>
     </Card>
   )
-} 
+}
